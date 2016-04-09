@@ -1,0 +1,12 @@
+<div class="content-fixed-navbar">
+    <div id="loginForm" class="wrapper container">
+        <div ng-if="loginError" class="panel panel-danger" ng-model="form.error">Bad credentials, please try again.</div>
+        <label for="login">Login:</label>
+        <input id="login" ng-model="form.login" type="text" class="form-control" placeholder="your login..." />
+        <br />
+        <label for="password">Password:</label>
+        <input id="password" ng-model="form.password" type="password" class="form-control" placeholder="password..." style="display: inline" />
+        <br/>
+        <button ng-click="login()" class="btn btn-primary">Sign in</button>
+    </div>
+</div>
