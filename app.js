@@ -1,11 +1,11 @@
 var app = angular.module('clinicApp', ["ui.router", "ngResource", "ui.bootstrap"]);
-   
+
 // ***
 // Routing
 // ***
 
 app
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
         $httpProvider.defaults.withCredentials = true;
 
@@ -51,7 +51,7 @@ app
                 url: '/',
                 templateUrl: 'templates/home.html',
             });
-        
+
         // for authorized users
         $stateProvider
             .state('user', {
@@ -63,40 +63,48 @@ app
                 }
             })
             .state('user.dashboard',
-                {
-                    url: "/dashboard",
-                    templateUrl: "templates/dashboard.html",
-                })
-        
-        // for higher access - rights users
+            {
+                url: "/dashboard",
+                templateUrl: "templates/dashboard.html",
+            })
+            .state('user.visits',
+            {
+                url: "/visits",
+                templateUrl: "templates/visits.html",
+                controller: 'visitsCtrl',
+            })
+
+
+
+            // for higher access - rights users
             .state('user.doctors',
+            {
+                url: "/doctors",
+                templateUrl: "templates/doctors.html",
+                controller: 'doctorsCtrl',
+                data:
                 {
-                    url: "/doctors",
-                    templateUrl: "templates/doctors.html",
-                    controller: 'doctorsCtrl',
-                    data:
-                    {
-                        access: "admin"
-                    }
-                })
+                    access: "admin"
+                }
+            })
             .state('user.patients',
+            {
+                url: "/patients",
+                templateUrl: "templates/patients.html",
+                controller: 'patientsCtrl',
+                data:
                 {
-                    url: "/patients",
-                    templateUrl: "templates/patients.html",
-                    controller: 'patientsCtrl',
-                    data:
-                    {
-                        access: "doctor"
-                    }
-                })
+                    access: "doctor"
+                }
+            })
 
     });
 
 app
-    .run(function ($rootScope, $state, Auth) {
+    .run(function($rootScope, $state, Auth) {
 
         $rootScope.$on("$stateChangeStart",
-            function (event, toState, toParams,
+            function(event, toState, toParams,
                 fromState, fromParams) {
                 console.log(fromState.name + " >>>>>> " + toState.name);
 
@@ -110,5 +118,8 @@ app
                     }
                 }
             });
+            
+            
+      // on start app ??  $state.go('all.login');
     })
 

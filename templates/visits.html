@@ -1,2 +1,24 @@
 <div class="content-fixed-navbar">
+    <button ng-if="!visits" class='btn btn-success' ng-click="schowVisits()">Show my visits</button>
+    <div ng-if="visits">
+        <h3>
+          My Visits:
+      </h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{visits.start | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{visits.end | date:'yyyy-MM-dd HH:mm'}}</td>
+                </tr>
+            </tbody>
+        </table>
+       
+
+    </div>
 </div>
